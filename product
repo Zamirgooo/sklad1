@@ -1,0 +1,12 @@
+data class Product(
+var name: String,
+var season: String,
+var quantity: Int,
+var price: Double,
+var date: String,
+var type: String,
+)
+
+
+
+
