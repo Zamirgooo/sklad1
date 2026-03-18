@@ -1,0 +1,32 @@
+import java.io.File
+
+class Warehouse {
+    private var products: MutableList<Product> = mutableListOf()
+
+    fun addProduct(Product: Product){
+        products.add(Product)
+    }
+    fun SearchByName(name: String): List<Product>{
+        return products.filter { it.name.lowercase() == name.lowercase()}.sortedBy { it.name }
+    }
+
+    fun SearchByDate(date: String): List<Product>{
+        return products.filter { it.date == date}.sortedBy { it.name }
+    }
+    fun SearchBySeason(season: String): List<Product>{
+        return products.filter { it.season.lowercase() == season.lowercase()}.sortedBy { it.name }
+    }
+
+    fun removeZeroQuantity(){
+        products.removeIf { it.quantity == 0 }
+    }
+
+    fun SaveToFail(filename: String){
+        val file = File(filename)
+        file.printWriter() .use { out ->
+            for (p in products){
+                out.println("${p.name} ,${p.season} , ${p.quantity} ,${p.price} ,${p.date} ,${p.type}")
+            }
+        }
+    }
+}
